@@ -47,7 +47,7 @@ module PictureTag
       end
 
       def alternates
-        [%w[jpg jpeg], %w[avif heic heif]]
+        [%w[jpg jpeg], %w[avif heic heif], %w[svg rsvg]]
       end
     end
   end
