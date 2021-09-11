@@ -8,7 +8,8 @@ module PictureTag
         elsif (magick_formats & all_names(format)).any?
           :magick
         else
-          raise error_string(format)
+          puts error_string(format)
+          :magick
         end
       end
 
@@ -40,9 +41,14 @@ module PictureTag
 
       def error_string(format)
         <<~HEREDOC
-          No support for generating #{format} files in this environment!
-          Libvips known savers: #{vips_formats.join(', ')}
-          Imagemagick known savers:  #{magick_formats.join(', ')}
+          \tWARNING:
+          \tNo support for generating #{format} files in this environment!
+          \t\tLibvips known savers: #{vips_formats.join(', ')}
+          \t\tImagemagick known savers:  #{magick_formats.join(', ')}
+
+          \tFalling back to ImageMagick in case a delegate is available that is not built in at compile time
+
+          \tIf this fails, check convert -l delegate and make sure you have the appropriate program installed for this file format
         HEREDOC
       end
 
